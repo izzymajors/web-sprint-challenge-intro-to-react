@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios'
 //import src from '*.bmp';
 import {BASE_URL} from './components/constant/index'
-
+import { Characters } from './components/Character'
 
 
  const App = () => {
@@ -17,6 +17,18 @@ import {BASE_URL} from './components/constant/index'
   const closeDetails = () =>{
     setCurrentCharacter(null)
   }
+
+  useEffect(() =>{
+  axios.get("http://swapi.dev/api/")
+  .then((res) =>{
+    setCharacters(res.people)
+  })
+  .catch((err) =>console.log(err))
+  
+ },[]) 
+
+ console.log('currentCharacter', currentCharacter);
+
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -26,7 +38,9 @@ import {BASE_URL} from './components/constant/index'
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <h1 className="Header">StarWars Characters</h1>
+      <div>current character</div>
+      
     </div>
   );
 }
